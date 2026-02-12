@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ruoyi开发学习 | PY†CHANNEL</title><meta name="author" content="Pymyname"><meta name="copyright" content="Pymyname"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="上图是若依项目demo的文件目录结构，模型依赖关系如下图:  正文新建业务模块开发时保持若依原有模块结构不变，自己新加业务模块，如上图的baogang-sale，步骤如下： 1.项目根目录（例子里面是baogangProject）下新建模块，注意构建系统选择maven，在该模块pom文件下增加项目核心模块的依赖（ruoyi-framework） 2.父工程版本锁定，pom.xml(ruoyi)下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ruoyi开发学习">
+<meta property="og:url" content="https://pyblog.me/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="PY†CHANNEL">
+<meta property="og:description" content="上图是若依项目demo的文件目录结构，模型依赖关系如下图:  正文新建业务模块开发时保持若依原有模块结构不变，自己新加业务模块，如上图的baogang-sale，步骤如下： 1.项目根目录（例子里面是baogangProject）下新建模块，注意构建系统选择maven，在该模块pom文件下增加项目核心模块的依赖（ruoyi-framework） 2.父工程版本锁定，pom.xml(ruoyi)下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pyblog.me/img/ima.png">
+<meta property="article:published_time" content="2026-02-05T04:28:49.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:44:53.107Z">
+<meta property="article:author" content="Pymyname">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pyblog.me/img/ima.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ruoyi开发学习",
+  "url": "https://pyblog.me/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/",
+  "image": "https://pyblog.me/img/ima.png",
+  "datePublished": "2026-02-05T04:28:49.000Z",
+  "dateModified": "2026-02-12T10:44:53.107Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pymyname",
+      "url": "https://pyblog.me"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://pyblog.me/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ruoyi开发学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">PY†CHANNEL</span></a><a class="nav-page-title" href="/"><span class="site-name">ruoyi开发学习</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">ruoyi开发学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-05T04:28:49.000Z" title="发表于 2026-02-05 12:28:49">2026-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-12T10:44:53.107Z" title="更新于 2026-02-12 18:44:53">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><img src="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/Blog\source\_posts\ruoyi开发学习\image-20260205125322033.png" alt="image-20260205125322033"></p>
+<p>上图是若依项目demo的文件目录结构，模型依赖关系如下图:</p>
+<p><img src="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/Blog\source\_posts\ruoyi开发学习\image-20260205125535855.png" alt="image-20260205125535855"></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="新建业务模块"><a href="#新建业务模块" class="headerlink" title="新建业务模块"></a>新建业务模块</h3><p>开发时保持若依原有模块结构不变，自己新加业务模块，如上图的baogang-sale，步骤如下：</p>
+<p>1.项目根目录（例子里面是baogangProject）下新建模块，注意构建系统选择maven，在该模块pom文件下增加项目核心模块的依赖（ruoyi-framework）</p>
+<p>2.父工程版本锁定，pom.xml(ruoyi)下添加新建模块的信息</p>
+<p>3.ruoyi-admin文件夹下的pom文件中添加新模块的依赖</p>
+<p><img src="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/Blog\source\_posts\ruoyi开发学习\image-20260205131816312.png" alt="image-20260205131816312"></p>
+<p><img src="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/Blog\source\_posts\ruoyi开发学习\image-20260205132155114.png" alt="image-20260205132155114"></p>
+<p><img src="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/Blog\source\_posts\ruoyi开发学习\image-20260205132401182.png" alt="image-20260205132401182"></p>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><p>baogang-sale 模块名</p>
+<p>baogang-sale/src/main/resources/templates下存放html文件，里面是前端代码和javascript脚本</p>
+<p>baogang-sale/src/main/resources/mapper是核心 SQL 层</p>
+<p>作用：存放 MyBatis 的 XML 映射文件。<br>文件详情：<br>BgSaleIndexItemMapper.xml<br>BgSaleIndexMapper.xml<br>BgSaleItemMapper.xml<br>关系：这些 XML 文件一一对应下文的 Java mapper 接口。<br>内容：这里面写的是真正的 SQL 语句（SELECT, INSERT, UPDATE, DELETE）。<br>例子：Java 接口里调 selectById(1)，MyBatis 就会来这个 XML 里找对应的 <select id="selectById"> 标签，执行里面的 SQL。</select></p>
+<p><b>baogang-sale/src/main/java/com.ruoyi是java代码层：</b></p>
+<p>domain (实体层 / Model)</p>
+<p>作用：存放 Java 类（POJO）。这里的每一个类通常对应数据库中的一张表。<br>内容：类中包含属性（对应表字段）以及 Getter/Setter 方法。<br>例子：可能有一个 BgSaleItem.java，里面包含 id, name, price 等属性。</p>
+<p>mapper (数据访问层 / DAO)</p>
+<p>作用：存放 Java 接口 (Interface)。这是代码与数据库交互的桥梁。<br>内容：定义了操作数据库的方法名，例如 selectSaleList(), insertSaleItem()。<br>注意：这里通常只有接口定义，没有具体的实现代码。具体的 SQL 语句写在 resources/mapper 下的 XML 文件里。</p>
+<p>service (业务逻辑层)</p>
+<p>作用：存放业务处理逻辑。<br>结构：通常包含一个接口（例如 ISaleService）和一个 impl 实现类包。<br>内容：这里是处理“怎么卖”的地方。比如：计算总价、校验库存是否充足、判断用户有没有权限购买等逻辑都在这里写。Controller 接收到请求后，会调用这里的方法。</p>
+<p>controller (控制层)</p>
+<p>作用：前端请求的入口（服务员）。<br>内容：定义 URL 接口（API）。比如前端发送一个 /sale/list 的请求，就是由这里的类来接收。<br>流程：它接收请求 -&gt; 解析参数 -&gt; 调用 service 层处理业务 -&gt; 拿到结果 -&gt; 返回给前端（JSON 数据）</p>
+<h2 id="一些需要注意的文件"><a href="#一些需要注意的文件" class="headerlink" title="一些需要注意的文件"></a>一些需要注意的文件</h2><p>（1）include.html</p>
+<p><b>这里面存放了一些全局变量，比如请求url的头：var ctx = [[@{/}]];</b></p>
+<p>[[@{/}]] 是 Thymeleaf 的语法，意思是“请帮我计算出项目的根目录路径”。</p>
+<p><b>统一管理基础环境</b></p>
+<p>如通用的css和js代码</p>
+<p><b>一些插件</b></p>
+<p>如下拉框插件等</p>
+<h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;th:block th:include=&quot;include :: select2-css&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>Thymeleaf 的语法，表示在include.html文件里找到select2-css对应的html代码拿过来放到这里</p>
+<p>阅读前端代码，首先要知道各种标签（下面列出之后需要知道的）：<br>（1）<head> 包含文档的元数据/信息</head></p>
+<p>（2）<body> 定义文档主体<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body></p>
+<p>（3）<div> 定义文档中的节（片段）</div></p>
+<p>（4）<form> 定义供用户输入的HTML表单</form></p>
+<p>（5）<b> 定义粗体字</b></p>
+<p>（6）<label> 定义input元素的标注</label></p>
+<p>（7）<input> 定义输入控件 默认type=“text“</p>
+<p>（8）<hr> 定义内容的主题变化</p>
+<p>（9）<select> 定义下拉列表</select></p>
+<p>（10）<option> 定义下拉列表中的选项</option></p>
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;firstLevel&quot; name=&quot;firstLevelIds&quot; class=&quot;form-control select2-multiple&quot; multiple&gt;</span><br><span class="line">    &lt;option th:each=&quot;item:$&#123;items&#125;&quot; th:value=&quot;$&#123;item.id&#125;&quot; th:text=&quot;$&#123;item.item&#125;&quot;&gt;&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>代码中 multiple表示支持用户按住 Ctrl/Cmd 键或通过插件界面选择多个选项。</p>
+<p>option部分使用th:前缀，说明它是服务器端渲染的动态代码。</p>
+<p>th:each=”item:${items}”: 循环指令。它的意思是：遍历后端传递过来的名为 items 的集合（List 或 Array）。在每次循环中，把当前对象赋值给变量 item。<br>th:value=”${item.id}”: 绑定值。它会将 HTML <option> 标签的 value 属性设置为当前 item 对象的 id 属性。<br>含义：这是用户选中后，真正提交给服务器的数据（通常是数据库的主键 ID）。<br>th:text=”${item.item}”: 绑定显示文本。它会将 HTML </option><option> 标签中间显示的文字内容设置为当前 item 对象的 item 属性（可能是名称、标题等）。<br>含义：这是用户在界面上看到的文字。</option></p>
+<p>（11）<link> 定义文档与外部资源的关系（最常用于链接样式表）</p>
+<p>（12）<script> 嵌入客户端脚本 要么包含脚本语句，要么通过src属性指向外部脚本文件。常用javascript。</p>
+<p>demo示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">                   *【产品大类变动】</span><br><span class="line">                   * 产品大类select变化时，自动更新产品型态select选项</span><br><span class="line">      */</span><br><span class="line">      $(&#x27;#firstLevel&#x27;).on(&#x27;change&#x27;, function (e) &#123;</span><br><span class="line">         // 1. 获取当前选中的值（因为是多选，得到的是数组）</span><br><span class="line">         firstLevels = $(&#x27;#firstLevel&#x27;).val();</span><br><span class="line">         // 2. 将数组拼接成逗号分隔的字符串 (例如: &quot;1,3,5,&quot;)</span><br><span class="line">         ids=&quot;&quot;;</span><br><span class="line">         for(i in firstLevels)&#123;</span><br><span class="line">            ids=ids+firstLevels[i]+&quot;,&quot;;</span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         // 3. 清空下一级下拉框的内容</span><br><span class="line">         $(&#x27;#secondLevel&#x27;).empty();</span><br><span class="line">        </span><br><span class="line">        // 4. 发送 AJAX 请求获取下一级的数据</span><br><span class="line">         $.ajax(&#123;</span><br><span class="line">          type: &quot;get&quot;,</span><br><span class="line">          url: ctx+&quot;baogang-sale/item/listByParentIds&quot;,</span><br><span class="line">          data: &#123;</span><br><span class="line">             &quot;ids&quot;: ids //上一级选中的id发给后端</span><br><span class="line">          &#125;,</span><br><span class="line">          success: function(data) &#123;</span><br><span class="line">          // 5. 后台直接返回了拼接好的 HTML &lt;option&gt; 字符串</span><br><span class="line">             /* var items = data.value</span><br><span class="line">             var html = &#x27;&#x27;</span><br><span class="line">             for(i==0;i&lt;items.length;i++)&#123;</span><br><span class="line">                html = html+&quot;&lt;option value=&#x27;&quot;+items[i].id+&quot;&#x27;&gt;&quot;+items[i].item+&quot;&lt;/option&gt;&quot;</span><br><span class="line">                $(&#x27;#secondLevel&#x27;).append(&quot;&lt;option value=&#x27;&quot;+items[i].id+&quot;&#x27;&gt;&quot;+items[i].item+&quot;&lt;/option&gt;&quot;)</span><br><span class="line">             &#125; */（注释掉了，不看）</span><br><span class="line">             var html = data.html</span><br><span class="line">             // 6. 将这些选项添加到下一级下拉框中</span><br><span class="line">             $(&#x27;#secondLevel&#x27;).append(html)</span><br><span class="line">             </span><br><span class="line">          &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>逻辑：当用户改变 firstLevel（产品大类）的选项时，JS 会收集所有选中的 ID，发给后端。后端根据这些大类 ID，查询出对应的所有 secondLevel（产品形态），并返回 HTML 代码片段。JS 再把这些 HTML 塞进 secondLevel 下拉框里。</p>
+<p>$(‘#firstLevel’).on(‘change’, function (e) {}的含义：找到id为firstLevel的元素，只要它的内容改变，就执行{}里面的操作</p>
+<p>$.ajax({ )} 是 jQuery 库中用来发送网络请求的命令。</p>
+<p>ruoyi中，ajax请求对应的后端处理逻辑一般都在controller层的.java文件里，上面的例子的请求url: ctx+”baogang-sale/item/listByParentIds”在BgSaleItemController.java里处理。（BgSaleItem是代码生成器生成某个表时的实体类名称）</p>
+<h2 id="url结构"><a href="#url结构" class="headerlink" title="url结构"></a>url结构</h2><p>baogang-sale：通常是模块名。<br>item：这通常对应的业务名称。<br>listByParentIds：这是这个文件里的具体方法名。</p>
+<p>在网页利用f12中的网络选项可以在触发对应操作后找到listByParentIds请求的url</p>
+<p><img src="F:\Blog\source\_posts\ruoyi开发学习\image-20260211234521394.png" alt="image-20260211234521394"></p>
+<p>选中产品大类为冷轧钢后，对应请求的响应为：</p>
+<p>{<br>    “code”: 200,<br>    “html”: “<optgroup label='--请选择【冷轧钢】的子类--'><option value='7'>冷轧平整卷</option><option value='8'>冷轧横切板</option></optgroup>“,<br>    “value”: [<br>        {<br>            “createBy”: null,<br>            “createTime”: “2024-01-01 00:00:00”,<br>            “updateBy”: null,<br>            “updateTime”: “2024-01-01 00:00:00”,<br>            “remark”: null,<br>            “id”: 1,<br>            “category”: “大类”,<br>            “item”: “冷轧钢”,<br>            “itemCode”: “C”,<br>            “status”: “1”,<br>            “parentId”: 0<br>        },<br>        {<br>            “createBy”: null,<br>            “createTime”: “2024-01-01 00:00:00”,<br>            “updateBy”: null,<br>            “updateTime”: “2024-01-01 00:00:00”,<br>            “remark”: null,<br>            “id”: 7,<br>            “category”: “型态”,<br>            “item”: “冷轧平整卷”,<br>            “itemCode”: “CRC”,<br>            “status”: “1”,<br>            “parentId”: 1<br>        },<br>        {<br>            “createBy”: null,<br>            “createTime”: “2024-01-01 00:00:00”,<br>            “updateBy”: null,<br>            “updateTime”: “2024-01-01 00:00:00”,<br>            “remark”: null,<br>            “id”: 8,<br>            “category”: “型态”,<br>            “item”: “冷轧横切板”,<br>            “itemCode”: “CGS”,<br>            “status”: “1”,<br>            “parentId”: 1<br>        }<br>    ]<br>}</p>
+<p>前面前端的代码就是将返回的”html”: “<optgroup label='--请选择【冷轧钢】的子类--'><option value='7'>冷轧平整卷</option><option value='8'>冷轧横切板</option></optgroup>“这个加到了二级下拉框中</p>
+<p><b>打印输出方法：console.log(); </b></p>
+<p>可以使用debugger语句使代码运行到该语句时停止，然后用网页的f12开发者工具查看</p>
+<p>（13）<optgroup> 对下拉列表的相关选项进行分组，有label属性</p>
+<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><p>现在看listByParentIds方法代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 查询大类及大类下的子类</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * 查询产品大类、小类、牌号等配置项列表</span><br><span class="line"> */</span><br><span class="line">@RequiresPermissions(&quot;baogang-sale:item:list&quot;)// 门卫：只有拥有特定权限的人才能调用我</span><br><span class="line">@GetMapping(&quot;/listByParentIds&quot;)// 门牌号：浏览器访问这个地址就能找到我</span><br><span class="line">@ResponseBody/ 喊话筒：告诉浏览器，我返回的是数据，不是网页文件</span><br><span class="line">public AjaxResult listByParentId(String ids)// 这是一个功能入口，参数为“ids”</span><br><span class="line">&#123;</span><br><span class="line">    List&lt;BgSaleItem&gt; items = new ArrayList&lt;BgSaleItem&gt;();</span><br><span class="line">    </span><br><span class="line">    String html = &quot;&quot;;/ 准备一张白纸，用来手写网页用的下拉菜单代码</span><br><span class="line">    </span><br><span class="line">    String[] parentIds = ids.split(&quot;,&quot;);// 把 &quot;1,2,3&quot; 按逗号切开，变成 [1, 2, 3]</span><br><span class="line">    for(String parentId:parentIds) &#123;// 开始一个个处理parentIds里的元素</span><br><span class="line">        if(!parentId.equals(&quot;&quot;)) &#123;// 防止有人传进来的ID是空的，安全检查</span><br><span class="line">           BgSaleItem parentItem = bgSaleItemService.selectBgSaleItemById(Long.parseLong(parentId));</span><br><span class="line">           items.add(parentItem);//查parentId对应的产品名，放到items里</span><br><span class="line">           html=html+&quot;&lt;optgroup label=&#x27;--请选择【&quot;+parentItem.getItem()+&quot;】的子类--&#x27;&gt;&quot;;</span><br><span class="line">           BgSaleItem item = new BgSaleItem();</span><br><span class="line">           item.setParentId(Long.parseLong(parentId));</span><br><span class="line">           item.setStatus(&quot;1&quot;); //状态1 表示启用</span><br><span class="line">           </span><br><span class="line">           List&lt;BgSaleItem&gt; tmps = bgSaleItemService.selectBgSaleItemList(item);</span><br><span class="line">           </span><br><span class="line">           items.addAll(tmps);</span><br><span class="line">           </span><br><span class="line">           for(BgSaleItem tmp:tmps) &#123;</span><br><span class="line">              html = html+&quot;&lt;option value=&#x27;&quot;+tmp.getId()+&quot;&#x27;&gt;&quot;+tmp.getItem()+&quot;&lt;/option&gt;&quot;;</span><br><span class="line">           &#125;</span><br><span class="line">           html = html+&quot;&lt;/optgroup&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    AjaxResult ajax = new AjaxResult();</span><br><span class="line">    ajax.put(&quot;code&quot;, 200);// 告诉前端：操作成功</span><br><span class="line">    ajax.put(&quot;html&quot;,html);// 把拼好的网页代码放进去</span><br><span class="line">    System.out.print(html);// 在后台控制台打印一下（方便程序员自己看）</span><br><span class="line">    ajax.put(&quot;value&quot;, items);// 把那一盒子原始数据也放进去</span><br><span class="line">    return ajax;// 任务结束，交货</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;BgSaleItem&gt; items = new ArrayList&lt;BgSaleItem&gt;();</span><br></pre></td></tr></table></figure>
+<p><BgSaleItem>表示domain文件夹下BgSaleItem.java文件定义的对象，相当于一个收纳盒，items是为收纳盒起的名字</p>
+<p><b>总结流程</b></p>
+<p>首先用户在网页中选中了一种或几种产品大类，然后$(‘#firstLevel’).on(‘change’, function (e)这个js检测到id为firstLevel的元素的内容有变化，就触发这个函数里面的操作，得到了用户选中的大类的id拼接的字符串（逗号隔开）。</p>
+<p>然后ajax发送网络请求到url：ctx+”baogang-sale/item/listByParentIds”,这个网络请求由controller接受，listByParentIds这个方法在BgSaleItemController.java文件里</p>
+<p>找到这个方法，这个方法调用了service文件夹下bgSaleItemService.java文件里的selectBgSaleItemById接口，但它不管怎么实现，具体实现在impl文件夹的BgSaleItemServiceImpl.java文件里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public BgSaleItem selectBgSaleItemById(Long id)</span><br><span class="line">&#123;</span><br><span class="line">    return bgSaleItemMapper.selectBgSaleItemById(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>找到bgSaleItemMapper.java文件下的selectBgSaleItemById，这个文件也只提供接口，真正实现在resources文件夹的mapper文件夹的xml文件里，xml文件里是一些sql语句，把查询结果返回给了前端，前端js脚本只取了html，贴到了前端网页上，具体返回的响应看前面。</p>
+</script></p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://pyblog.me">Pymyname</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pyblog.me/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/">https://pyblog.me/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://pyblog.me" target="_blank">PY†CHANNEL</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a></div><div class="post-share"><div class="social-share" data-image="/img/ima.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/15/%E6%B8%B8%E6%88%8F%E5%9B%9E%E9%A1%BE%E2%80%94%E2%80%94P5R/" title="游戏回顾——P5R"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">游戏回顾——P5R</div></div><div class="info-2"><div class="info-item-1">前言P5R是我在大二时游玩的作品，通关时长114h，游玩过程非常上头，日常活动中提升五维，培养社群给人的获得感很强，无疑是一款值得游玩的jrpg。但是现在回过头看，P5R的缺点也很明显，首先是战斗部分到了奥村那里让我开始觉得有些乏味，游戏后期这种回合制的战斗对我来说实在没有什么乐趣可言。其次剧情部分，填补的支线任务和coop剧情过于模板化，对于处于问题中心的人的塑造实在不够，以至于有些社群的人的名字现在我都叫不出。不过写下这篇博客主要想整理一下我对第三学期剧情的一些想法。 正文第三学期剧情的分歧就在于接受还是反抗丸喜创造的世界。选择接受丸喜的现实，所有人留在了丸喜创造的世界中，幸福地生活下去；选择反抗丸喜的现实，则在夺取丸喜的秘宝后，人们得以回到原来的世界。 游戏剧情里，接受丸喜的世界的理由很简单，同伴们在这个世界中获得了幸福，至少看上去如此。而选择反抗丸喜的路线中，怪盗团认为，丸喜的做法是一种逃避，丸喜创造的是一个虚假的世界，这个世界给人们的是虚假的幸福。 主角团们最后当然还是直面创伤那一套，但是剧情表现得很无力。我认为这里面包含一种偏见：认为被人操控，活在其他人创造的世界中无...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/ima.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Pymyname</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://bgm.tv/user/847586"><i class="fas fa-link"></i><span>Bangumi主页</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text">新建业务模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">一些需要注意的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">前端代码</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/05/ruoyi%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/" title="ruoyi开发学习">ruoyi开发学习</a><time datetime="2026-02-05T04:28:49.000Z" title="发表于 2026-02-05 12:28:49">2026-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/15/%E6%B8%B8%E6%88%8F%E5%9B%9E%E9%A1%BE%E2%80%94%E2%80%94P5R/" title="游戏回顾——P5R">游戏回顾——P5R</a><time datetime="2025-08-15T07:24:32.000Z" title="发表于 2025-08-15 15:24:32">2025-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/14/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/" title="博客介绍">博客介绍</a><time datetime="2025-08-14T09:57:55.000Z" title="发表于 2025-08-14 17:57:55">2025-08-14</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Pymyname</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
